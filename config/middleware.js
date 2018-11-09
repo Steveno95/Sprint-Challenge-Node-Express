@@ -3,7 +3,7 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 
 const projectRouter = require('../routers/projectRouter.js');
-//const actionRouter = require('../routers/actionRouter.js');
+const actionRouter = require('../routers/actionRouter.js');
 
 module.exports = server => {
   
@@ -12,5 +12,5 @@ module.exports = server => {
   server.use(morgan('short'));
 
   server.use('/api/projects', projectRouter);
-  //server.use('/api/actions', actionRouter);
+  server.use('/api/actions', actionRouter);
 };
