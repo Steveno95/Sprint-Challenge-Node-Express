@@ -34,7 +34,7 @@ router.get('/', (req, res) => {
       });
   });
 
-  router.get('/actions/:id', (req, res) => { //this basically does the same thing as above but uses the getProjectActions
+  router.get('/:id/actions', (req, res) => { //this basically does the same thing as above but uses the getProjectActions
     const id = req.params.id;
     project.getProjectActions(id)
         .then(actions => {

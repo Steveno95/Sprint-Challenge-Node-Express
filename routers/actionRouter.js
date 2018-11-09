@@ -16,10 +16,23 @@ router.get('/', (req, res) => {
       });
   });
   
-  router.get('/:id', (req, res) => {
+  router.get('/:id', async (req, res) => {
     const { id } = req.params;
-  
-    action.get(id)
+
+    try {
+        const actions = await action.get(id);
+        if (actions) {
+            res.status(200).json(actions);
+          } else {
+            res.status(404).json({ message: 'action not found' });
+          }
+    } catch (error) {
+        res
+        .status(500)
+        .json({ message: "we failed you, can't get the action", error: err });
+    }
+
+    /*action.get(id)
       .then(action => {
         if (action) {
           res.status(200).json(action);
@@ -31,7 +44,7 @@ router.get('/', (req, res) => {
         res
           .status(500)
           .json({ message: "we failed you, can't get the action", error: err });
-      });
+      });*/
   });
   
   router.post('/', async (req, res) => {
